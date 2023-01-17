@@ -25,10 +25,10 @@ const getUserInput = () => {
 
 const addHovering = (e) => {
     if (brushStyle === "reg") {
-        e.target.style.backgroundColor = '#2b2b2b';
+        e.target.style = 'background-color: #2b2b2b';
     }
     else if (brushStyle === "rgb") {
-        e.target.style.backgroundColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+        e.target.style = `background-color: rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
     }
     else if (brushStyle === "ink") {
         e.target.style.backgroundColor = 'black';
