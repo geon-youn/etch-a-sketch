@@ -1,24 +1,43 @@
 let size = 16;
 const container = document.querySelector('#grid');
 
+// Can be reg, rgb, ink, era
+let brushStyle = "reg";
+
 const sizeButton = document.querySelector('#set-size');
-sizeButton.addEventListener('click', e => {
+sizeButton.addEventListener('click', () => {
     size = getUserInput();
     createGrid();
 });
 
 const createButton = document.querySelector('#reset-grid');
-createButton.addEventListener('click', e => {
+createButton.addEventListener('click', () => {
     createGrid();
 });
 
 const getUserInput = () => {
     let size = 0;
     do {
-        size = Number(prompt("Enter the size of the grid (max 100):"));
+        size = parseInt(prompt("Enter the size of the grid (max 100):", 16));
     } while (size < 0 || size > 100);
     return size;
 }
+
+const addHovering = (e) => {
+    if (brushStyle === "reg") {
+        e.target.style.backgroundColor = '#2b2b2b';
+    }
+    else if (brushStyle === "rgb") {
+        e.target.style.backgroundColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+    }
+    else if (brushStyle === "ink") {
+        e.target.style.backgroundColor = 'black';
+        e.target.style.opacity = e.target.style.opacity == "" ? "0.1" : Number(e.target.style.opacity) + 0.1;
+    }
+    else if (brushStyle === "era") {
+        e.target.removeAttribute('style');
+    }
+};
 
 const createGrid = () => {
     container.innerHTML = "";
@@ -28,15 +47,11 @@ const createGrid = () => {
         for (let j = 0; j < size; j++) {
             const div = document.createElement('div');
             div.classList.add('grid-item');
-            div.addEventListener('mousedown', () => {div.setAttribute('id', 'hovering')});
+            div.addEventListener('mousedown', addHovering);
             row.appendChild(div);
         }
         container.appendChild(row);
     }
-};
-
-const addHovering = (e) => {
-    e.target.setAttribute('id', 'hovering');
 };
 
 container.addEventListener('mousedown', () => {
@@ -54,3 +69,14 @@ container.addEventListener('mouseup', () => {
 });
 
 createGrid();
+
+const brushButtons = document.querySelectorAll('.brush');
+brushButtons.forEach(button => {
+    button.addEventListener('click', e => {
+        brushButtons.forEach(b => {
+            b.removeAttribute('disabled');
+        });
+        button.setAttribute('disabled', '');
+        brushStyle = e.target.id;
+    });
+});
