@@ -1,5 +1,6 @@
 .row {
     display: flex;
+    flex: 1;
     /* gap: 5px; */
 }
 
@@ -19,14 +20,23 @@ body {
     width: 100%;
     height: 100%;
     margin: 0;
+    background-color: #d1d1d1;
 }
 
 .row div {
-    width: 40px;
-    height: 40px;
-    background-color: aliceblue;
+    flex: 1;
+    min-width: 1px;
+    min-height: 1px;
+    background-color: #d1d1d1;
 }
 
 #hovering {
-    background-color: antiquewhite;
+    background-color: #535353;
+}
+
+#grid {
+    width: 960px;
+    height: 960px;
+    display: flex;
+    flex-direction: column;
 }
