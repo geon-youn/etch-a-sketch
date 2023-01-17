@@ -6,7 +6,7 @@ sizeButton.addEventListener('click', e => {
     createGrid();
 });
 
-const createButton = document.querySelector('#create-grid');
+const createButton = document.querySelector('#reset-grid');
 createButton.addEventListener('click', e => {
     createGrid();
 });
